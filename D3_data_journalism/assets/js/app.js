@@ -47,11 +47,11 @@ d3.csv("./assets/data/data.csv").then(function(healthData) {
 
   // Step 5: Create the scales for the chart
   // =================================
-  	var xLinearScale = d3.scaleLinear()
+    var xLinearScale = d3.scaleLinear()
         .domain([8, d3.max(healthData, d => d.poverty)])
         .range([0, width]);
 
- 		
+    
     var yLinearScale = d3.scaleLinear()
         .domain([0, d3.max(healthData, d => d.healthcare)])
         .range([height, 0]);
@@ -63,7 +63,7 @@ d3.csv("./assets/data/data.csv").then(function(healthData) {
 
   // Step 7: Append Axes to the chart
   // ==============================
-	chartGroup.append("g")
+  chartGroup.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis);
 
@@ -101,6 +101,13 @@ var circlesGroup = chartGroup.selectAll("g circle")
       .attr("class", "aText")
       .text("Lacks Healthcare(%)");
 
+    chartGroup.append("text")
+    .attr("x", width/2)
+    .attr("y", height+50)
+    .attr("value", "poverty") // value to grab for event listener
+    // .classed("active", true)
+    .text("In Poverty (%)");
+
     // 
     var circletextGroup = chartGroup.selectAll()
             .data(healthData)
@@ -113,4 +120,3 @@ var circlesGroup = chartGroup.selectAll("g circle")
      
 
 });
- 
